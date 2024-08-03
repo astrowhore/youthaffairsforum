@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=MonteCarlo">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oregano">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Parisienne">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pristina">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pompiere">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ramaraja">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=MonteCarlo">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ComicSansMS">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PlayfairDisplay">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>YAF | Blogs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Ramaraja';
+        }
+
+        .header {
+            width: 100%;
+            overflow-x: hidden;
+            
+            flex-direction: column;
+            
+
+        }
+
+
+        nav {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 8%;
+            transition: background 0.5s;
+            color: white;
+            font-size: 20px;
+        }
+
+        nav .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.6rem;
+            font-weight: 600;
+           
+        }
+
+        nav .logo img {
+            width: 50px;
+            margin-right: 10px;
+            border-radius: 100%;
+        }
+
+        nav ul {
+            display: flex;
+        }
+
+        nav ul li {
+            list-style: none;
+            margin: 10px 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            
+            font-weight: 500;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 5px;
+            position: relative;
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: -5px;
+            position: relative;
+        }
+
+        .overlay {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color:#f1bfba;
+            overflow-x: hidden;
+            transition: 0.5s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .overlay-content {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .overlay-content a {
+            padding: 8px;
+            text-decoration: none;
+            font-size: 36px;
+            color: rgb(0, 0, 0);
+            display: block;
+            transition: 0.3s;
+        }
+
+        .overlay-content a:hover, .overlay-content a:focus {
+            color: #f1f1f1;
+        }
+
+        .overlay .closebtn {
+            position: absolute;
+            top: 20px;
+            right: 45px;
+            font-size: 60px;
+            cursor: pointer;
+            color: white;
+        }
+
+
+
+
+        .content h1 {
+            font-size: 800px;
+            line-height: 1.2;
+            font-weight: 400;
+            font-family: 'Ramaraja';
+            font-size: 48px;
+            color: #ffffff;
+
+        }
+
+        .content p {
+            line-height: 1.6;
+            opacity: 0;
+            color: white;
+            animation-delay: 1s;
+            font-family: 'Ramaraja';
+            font-size: 20px;
+        }
+
+        .links {
+            margin-top: 30px;
+            opacity: 0;
+        }
+
+        .links a {
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 1s;
+        }
+
+        .btn {
+            border: 2px solid white;
+            padding: 10px 35px;
+            border-radius: 30px;
+            margin-right: 15px;
+        }
+
+        .slide-right {
+            animation: slideright 1s linear forwards;
+            animation-delay: 1s;
+            opacity: 0;
+        }
+
+        @keyframes slideright {
+            0% {
+                transform: translate(100px);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(0px);
+                opacity: 1;
+            }
+        }
+
+        .slide-left {
+            animation: slideleft 1s linear forwards;
+        }
+
+        @keyframes slideleft {
+            0% {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0px);
+                opacity: 1;
+            }
+        }
+
+
+
+        .links.slide-left {
+            animation-delay: 1s;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .main-content {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+
+
+
+
+            .btn {
+                padding: 8px 30px;
+            }
+
+
+        }
+
+        @media (min-width: 769px) {
+            .feature-img {
+                width: 400px;
+                position: absolute;
+                bottom: 40px;
+                right: 5%;
+            }
+        }
+        .links a:hover {
+            background-color: #2F005D;
+            color: black;
+            text-decoration: none;
+        }
+        .nav-links li a{
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+            
+        }
+
+        .section-style p {
+            font-size: 20px
+        }
+        .SDGheading {
+            width: 90%;
+            height: 80%;
+            background-color: #D7A496;
+            font-size: 60px;
+            color: black;
+        }
+
+        .SDGheading p {
+            font-size: 60px;
+            color: black;
+            margin-top: 0px;
+        }
+            
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <nav>
+            <div class="logo">
+                <a href="index.html"><img src="images/YAC Logo.png" alt=""></a>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="founder.html">Founder</a></li>
+                <li><a href="team.html">Our Team</a></li>
+                <li><a href="blog.html">Blogs</a></li>
+                <li><a href="mun.html">Model UN</a></li>
+                <li><a href="debate.html">Debates</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li>
+                    <a onclick="toggleMore(event)">More ▼</a>
+                    <ul class="more-submenu">
+                        <li><a href="resource.html">Resources</a></li>
+                        <li><a href="sdggoals.html">SDG Goals</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+
+        <div class="overlay" id="overlay">
+            <span class="closebtn" id="closebtn">&times;</span>
+            <div class="overlay-content">
+                <a href="founder.html">Founder</a>
+                <a href="team.html">Our Team</a>
+                <li><a href="blog.html">Blogs</a></li>
+                <a href="mun.html">Model UN</a>
+                <a href="debate.html">Debates</a>
+                <a href="contact.html">Contact</a>
+                <li>
+                    <a onclick="toggleMore(event)">More ▼</a>
+                    <ul class="more-submenu">
+                        <center><li><a href="resource.html">Resources</a></li></center>
+                        <center><li><a href="sdggoals.html">SDG Goals</a></li></center>
+                    </ul>
+                </li>
+            </div>
+        </div>
+
+    </div> <br>
+
+    <center><div class="SDGheading"><p>Blogs</p></div></center>
+<style>
+    .button-container {
+        text-align: center;
+    }
+    .form-container {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    .form-group input[type="file"],
+    .form-group input[type="text"] {
+        display: block;
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+    .form-group button {
+        padding: 10px 20px;
+        background-color: #ff69b4;
+        color: #fff;
+        border: none;
+        border-radius: 40px;
+        width: 40%;
+        cursor: pointer;
+        font-family: 'PlayfairDisplay';
+    }
+    .form-group button:hover {
+        background-color: #fc48a2;
+    }
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+    .error {
+        color: red;
+        margin-top: 10px;
+    }
+    .form-container {
+        font-family: 'PlayfairDisplay';
+    }
+</style>
+<script>
+    function openForm() {
+        document.getElementById('form-container').style.display = 'block';
+        document.getElementById('modal-overlay').style.display = 'block';
+    }
+
+    function closeForm() {
+        document.getElementById('form-container').style.display = 'none';
+        document.getElementById('modal-overlay').style.display = 'none';
+    }
+
+    function validateFile() {
+        const fileInput = document.getElementById('file');
+        const file = fileInput.files[0];
+        const errorMessage = document.getElementById('error-message');
+
+        if (file.size > 10 * 1024 * 1024) { // 10 MB limit
+            errorMessage.textContent = 'File size must be less than 10 MB';
+            return false;
+        }
+
+        errorMessage.textContent = '';
+        return true;
+    }
+</script>
+</head>
+<body>
+<div class="button-container">
+    <p style="color: black; font-size: 20px;">What to share? Upload you article <a onclick="openForm()">here</a></p>
+</div>
+
+<div id="form-container" class="form-container">
+    <h2>Upload your Article!</h2>
+    <form action="https://usebasin.com/f/ff3b56c82927
+    " method="POST" enctype="multipart/form-data" onsubmit="return validateFile()">
+        <input type="hidden" name="_captcha" value="false">
+        <div class="form-group">
+            
+            <input type="text" id="name" name="name" placeholder="Enter your Full Name" required>
+        </div>
+        <div class="form-group">
+            
+            <input type="file" id="file" name="file" required>
+        </div>
+        <div class="form-group">
+            <button type="submit">Submit</button>
+            <button type="button" onclick="closeForm()">Cancel</button>
+        </div>
+        <div id="error-message" class="error"></div>
+    </form>
+</div>
+
+<div id="modal-overlay" class="modal-overlay" onclick="closeForm()"></div>
+      
+
+<style>
+    .button-container p {
+        cursor: pointer;
+    }
+    .blogpost {
+        width: 40px;
+        height: 40%;
+        text-decoration: none;
+    }
+    .quota {
+        background-image: url(images/quotaP1.png);
+        background-position: center;
+        background-size: cover;
+        width: 40%;
+        height: 80%;
+        color: white;
+        text-decoration: none;
+    }
+    .quota:hover {
+        text-decoration: none;
+        color: white;
+    }
+
+    
+    
+</style>
+       
+
+
+<center>
+    <a style="width: 40px;" href="postNo1.html">
+        <div class=".blogpost quota"><br>
+            <h3 style="margin: 3%;">The quota reform of Bangladesh: Searching for Equality and Justice</h3>
+            <p>Reyan Punjabi</p>
+            <br><br><br><br><br><br>
+        </div>
+    </a>
+</center>
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const overlay = document.getElementById('overlay');
+        const closeBtn = document.getElementById('closebtn');
+
+        menuToggle.addEventListener('click', () => {
+            overlay.style.width = '100%';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            overlay.style.width = '0';
+        });
+
+        function toggleMore(event) {
+            event.preventDefault();
+            const moreSubmenu = event.currentTarget.nextElementSibling;
+            moreSubmenu.classList.toggle('active');
+        }
+    </script>
+
+<style>
+    .more-submenu {
+            display: none;
+            position: absolute;
+            margin-left: -4%;
+            flex-direction: column;
+            z-index: 1;
+            list-style: none;
+        }
+
+        .more-submenu li a{
+            margin-top: 1%;
+        }
+
+        .overlay li:hover .more-submenu {
+            display: flex;
+        }
+
+        .nav-links li:hover .more-submenu {
+            display: flex;
+        }
+
+
+
+        .more-submenu a {
+            padding: 8px 16px;
+            color: black;
+            width: 100%;
+            text-align: center;
+        }
+
+
+
+
+
+
+    
+      h2 {
+      font-family: 'Times New Roman', Times, serif;
+      color: black;
+    }
+    h4{
+      color: black;
+    }
+  </style>
+  </body>
+  
+  <style>
+  
+  #title {
+              font-family: 'MonteCarlo';
+              font-size: 50px;
+          }
+      body {
+      text-align: center;
+      
+  }
+
+  .image-section {
+      display: flex;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0);
+      width: 95%;
+      border-radius: 20px;
+  }
+  .section-style {
+      margin-right: 25px;
+      margin-left: 25px;
+      
+  }
+  
+
+  img {
+      width: 200px;
+  }
+  
+  
+      body {
+          background-image: url("slideshow_bg.jpeg");
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-attachment: fixed;
+      }
+  
+  </style>
+  
+</body>
+</html>

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=MonteCarlo">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oregano">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Parisienne">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pristina">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pompiere">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ramaraja">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=MonteCarlo">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ComicSansMS">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>YAF | Blog Post</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Ramaraja';
+        }
+
+        .header {
+            width: 100%;
+            overflow-x: hidden;
+            box-shadow: 10px 10px 5px grey;
+            flex-direction: column;
+            
+
+        }
+       
+
+
+        nav {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 8%;
+            transition: background 0.5s;
+            color: white;
+            font-size: 20px;
+            background-color: #f1bfba;
+        }
+
+        nav .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.6rem;
+            font-weight: 600;
+           
+        }
+
+        nav .logo img {
+            width: 50px;
+            margin-right: 10px;
+            border-radius: 100%;
+        }
+
+        nav ul {
+            display: flex;
+        }
+
+        nav ul li {
+            list-style: none;
+            margin: 10px 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            
+            font-weight: 500;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 5px;
+            position: relative;
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: -5px;
+            position: relative;
+        }
+
+        .overlay {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color:#f1bfba;
+            overflow-x: hidden;
+            transition: 0.5s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .overlay-content {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .overlay-content a {
+            padding: 8px;
+            text-decoration: none;
+            font-size: 36px;
+            color: rgb(0, 0, 0);
+            display: block;
+            transition: 0.3s;
+        }
+
+        .overlay-content a:hover, .overlay-content a:focus {
+            color: #f1f1f1;
+        }
+
+        .overlay .closebtn {
+            position: absolute;
+            top: 20px;
+            right: 45px;
+            font-size: 60px;
+            cursor: pointer;
+            color: white;
+        }
+
+
+
+
+        .content h1 {
+            font-size: 800px;
+            line-height: 1.2;
+            font-weight: 400;
+            font-family: 'Ramaraja';
+            font-size: 48px;
+            color: #ffffff;
+
+        }
+
+        .content p {
+            line-height: 1.6;
+            opacity: 0;
+            color: white;
+            animation-delay: 1s;
+            font-family: 'Ramaraja';
+            font-size: 20px;
+        }
+
+        .links {
+            margin-top: 30px;
+            opacity: 0;
+        }
+
+        .links a {
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 1s;
+        }
+
+        .btn {
+            border: 2px solid white;
+            padding: 10px 35px;
+            border-radius: 30px;
+            margin-right: 15px;
+        }
+
+        .slide-right {
+            animation: slideright 1s linear forwards;
+            animation-delay: 1s;
+            opacity: 0;
+        }
+
+        @keyframes slideright {
+            0% {
+                transform: translate(100px);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(0px);
+                opacity: 1;
+            }
+        }
+
+        .slide-left {
+            animation: slideleft 1s linear forwards;
+        }
+
+        @keyframes slideleft {
+            0% {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0px);
+                opacity: 1;
+            }
+        }
+
+
+
+        .links.slide-left {
+            animation-delay: 1s;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .main-content {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+
+
+
+
+            .btn {
+                padding: 8px 30px;
+            }
+
+
+        }
+
+        @media (min-width: 769px) {
+            .feature-img {
+                width: 400px;
+                position: absolute;
+                bottom: 40px;
+                right: 5%;
+            }
+        }
+        .links a:hover {
+            background-color: #2F005D;
+            color: black;
+            text-decoration: none;
+        }
+        .nav-links li a{
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            
+        }
+
+        .section-style p {
+            font-size: 20px
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <nav>
+            <div class="logo">
+                <a href="index.html"><img src="images/YAC Logo.png"></a>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="founder.html">Founder</a></li>
+                <li><a href="team.html">Our Team</a></li>
+                <li><a href="blog.html">Blogs</a></li>
+                <li><a href="mun.html">Model UN</a></li>
+                <li><a href="debate.html">Debates</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li>
+                    <a onclick="toggleMore(event)">More ▼</a>
+                    <ul class="more-submenu">
+                        <li><a href="resource.html">Resources</a></li>
+                        <li><a href="sdggoals.html">SDG Goals</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+
+        <div class="overlay" id="overlay">
+            <span class="closebtn" id="closebtn">&times;</span>
+            <div class="overlay-content">
+                <a href="founder.html">Founder</a>
+                <a href="team.html">Our Team</a>
+                <li><a href="blog.html">Blogs</a></li>
+                <a href="mun.html">Model UN</a>
+                <a href="debate.html">Debates</a>
+                <a href="contact.html">Contact</a>
+                <li>
+                    <a onclick="toggleMore(event)">More ▼</a>
+                    <ul class="more-submenu">
+                        <center><li><a href="resource.html">Resources</a></li></center>
+                        <center><li><a href="sdggoals.html">SDG Goals</a></li></center>
+                    </ul>
+                </li>
+            </div>
+        </div>
+
+        
+    </div> <br>
+
+    <style>
+        h5{
+            text-align: left; 
+            margin: 2%;
+        }
+
+        .blogPic {
+            width: 60%;
+        }
+    </style>
+
+    <center><h1>The Quota Reform Movement of Bangladesh: Searching for Equality and Justice</h1></center>
+    <h4>Reyansh Punjabi (20th July 2024)</h4><br>
+
+    <h5>
+        The quota reform movement leading today's Bangladesh to the forefront has been leading for the last couple of months. This student-led movement is one that is seeking to make changes in the quota system, which the country has in its public sector job sectors and educational institutions. This quota system is riddled with an overaged, unjust structure. By mid-2024, the movement had gained further protests and clashes. These events drew nationwide and worldwide attention. <br><br>
+
+The quota system in Bangladesh was set up primarily to provide representation to underprivileged groups of society by reserving a fair percentage of public sector jobs and university admissions for categories such as freedom fighters' descendants, women, indigenous peoples, and disabled persons. At present, this system has been criticized for perpetuating inequality and hampering meritocracy. <br><br>
+
+In the first week of July 2024, following a High Court decision reinstating quotas for government jobs, the Supreme Court sparked widespread student and teacher protests. Thousands of students from Dhaka University and Rajshahi University blocked highways while demanding the abolition of quota systems. These agitations severely disrupted academic activities and caused much trouble to public services. <br><br>
+
+    </h5>
+    <img class="blogPic" src="https://onecms-res.cloudinary.com/image/upload/s---_2p_7L---/c_fill,g_auto,h_468,w_830/fl_relative,g_south_east,l_one-cms:core:watermark:ap_data-1,w_0.1/f_auto,q_auto/v1/one-cms/core/bangladesh_campus_violence_43638.jpg?itok=kx7e4AdA" alt="">
+    <br>
+
+    <h5>
+        The government has been very strict in its response. Prime Minister Sheikh Hasina, who was open to talking during the 2018 agitation, termed this anti-quota movement unreasonable after the court verdict. Her statement lays emphasis on abiding by the decisions of the courts and the positiveness of quota system in balancing opportunities for underprivileged groups​. <br><br>
+
+The student protests have often turned violent, pitting students against police and ruling party student wing activists from the Bangladesh Chhatra League. Scores of protesters are said to have been killed and hundreds hurt in clashes. Harsh measures by the government—internet shutdowns and crackdowns by BCL activists—have added fuel to the flames of protests​. Important Collectibles include Nationwide Unrest​ and Way Ahead. <br><br>
+
+
+The quota reform movement further reiterates that there needs to be a balanced approach wherein meritocracy and social justice walk together. Therefore, in times to come, the government should engage in constructive dialogue with all stakeholders, have a transparent working of reforms, and always monitor and review the policies for any unintended consequences. <br><br>
+
+The quota reform movement in Bangladesh is one of the bigger movements for the establishment of a just society. It may be able to transform the country's socio-economic landscape by rectifying flaws in the present system and giving opportunities strictly based on merit. The movement remains a very potent indicator of youth activism and the continuing quest for justice and equality, as it is not ceasing but changing course. <br><br>
+    </h5>
+
+    <img class="blogPic" src="https://apicms.thestar.com.my/uploads/images/2024/07/17/thumbs/700/2806284.webp"><br>
+
+    <h5>
+        The protests often turned violent, as students clashed with law enforcers and activists of the ruling party's student wing, Bangladesh Chhatra League. According to reports, scores of protesters were killed and hundreds injured in the clashes. A slew of aggressive moves by the government, from shutting off the internet to the rampage by BCL men, added to the volatile situation and caused widespread unrest. <br><br>
+
+Quotas have become part of a much larger movement against the administration's policies, corruption, and opacity. To the students and young professionals, beset by unemployment and lack of opportunities, it is part of a movement for a more just and equitable society. Such demands have further galvanized a larger share of the population, including civil society groups and opposition political elements, adding their weight to the pressure that the government exerts on these long-standing grievances. <br><br>
+
+The quota reform movement in Bangladesh has been a turning point in the socio-political scenario of this country. The movement questions the present quota policy and points toward greater aspirations for a merit-based, just society. The intensifying protests and rigid government response show that deep-rooted tensions require absolutely necessary constructive dialogue and comprehensive reforms. While the students and activists continue to push for change, the impact goes beyond immediate policy adjustments in an attempt to address systemic issues of inequality and governance​. <br><br>
+
+Down the track of Bangladesh's future course, how this is going to strike a balance between meritocracy and social justice will be very important. The ongoing struggle calls to mind the force of youth activism and the collective effort entailed in bringing about meaningful change of lasting nature. <br><br>
+
+    </h5>
+
+    <img class="blogPic" src="https://ecdn.dhakatribune.net/contents/cache/images/900x505x1/uploads/media/2024/07/10/quota-c80925533fc0f38f4033c1ba385a3ad5.jpg?jadewits_media_id=24201">
+<br>
+
+<h3>Sources</h3>
+<h5>The Daily Star: Bangladesh Anti-Quota Protest Live Updates​ <a href="https://www.thedailystar.net/news/bangladesh/news/quota-reform-protests-across-bangladesh-3659566">(The Daily Star)</a>​. <br>
+    The Diplomat: <a href="https://thediplomat.com/2024/07/bangladeshi-university-students-protest-quota-system-reforms/">Bangladeshi University Students Protest Quota System Reforms​</a><br>
+    <a href="https://www.channelnewsasia.com/asia/student-killed-amid-violent-anti-quota-protests-bangladesh-4482771">https://www.channelnewsasia.com/asia/student-killed-amid-violent-anti-quota-protests-bangladesh-4482771
+    </a><br>
+    <a href="https://www.thestar.com.my/news/world/2024/07/17/bangladesh-shuts-universities-colleges-indefinitely-after-protests-turn-deadly">https://www.thestar.com.my/news/world/2024/07/17/bangladesh-shuts-universities-colleges-indefinitely-after-protests-turn-deadly
+    </a>
+    <a href="https://www.dhakatribune.com/bangladesh/351700/anti-quota-movement-what-do-protesters-actually">https://www.dhakatribune.com/bangladesh/351700/anti-quota-movement-what-do-protesters-actually
+    </a>
+</h5>
+
+   
+       
+   
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const overlay = document.getElementById('overlay');
+        const closeBtn = document.getElementById('closebtn');
+
+        menuToggle.addEventListener('click', () => {
+            overlay.style.width = '100%';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            overlay.style.width = '0';
+        });
+
+        function toggleMore(event) {
+            event.preventDefault();
+            const moreSubmenu = event.currentTarget.nextElementSibling;
+            moreSubmenu.classList.toggle('active');
+        }
+    </script>
+
+<style>
+    .more-submenu {
+            display: none;
+            position: absolute;
+            margin-left: -4%;
+            flex-direction: column;
+            z-index: 1;
+            list-style: none;
+        }
+
+        .more-submenu li a{
+            margin-top: 1%;
+        }
+
+        .overlay li:hover .more-submenu {
+            display: flex;
+        }
+
+        .nav-links li:hover .more-submenu {
+            display: flex;
+        }
+
+
+
+        .more-submenu a {
+            padding: 8px 16px;
+            color: black;
+            width: 100%;
+            text-align: center;
+        }
+
+
+
+
+
+
+    
+      h2 {
+      font-family: 'Times New Roman', Times, serif;
+      color: black;
+    }
+    h4{
+      color: black;
+    }
+  </style>
+  </body>
+  
+  <style>
+  
+  #title {
+              font-family: 'MonteCarlo';
+              font-size: 50px;
+          }
+      body {
+      text-align: center;
+      
+  }
+
+  .image-section {
+      display: flex;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0);
+      width: 95%;
+      border-radius: 20px;
+  }
+  .section-style {
+      margin-right: 25px;
+      margin-left: 25px;
+      
+  }
+  
+
+  img {
+      width: 200px;
+  }
+  
+  
+      body {
+          background-image: url("slideshow_bg.jpeg");
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-attachment: fixed;
+      }
+  
+  </style>
+  
+</body>
+</html>

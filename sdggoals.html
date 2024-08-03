@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=MonteCarlo">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oregano">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Parisienne">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pristina">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pompiere">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ramaraja">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=MonteCarlo">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ComicSansMS">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>YAF | SDG Goals</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Ramaraja';
+        }
+
+        .header {
+            width: 100%;
+            overflow-x: hidden;
+            
+            flex-direction: column;
+            
+
+        }
+
+
+        nav {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 8%;
+            transition: background 0.5s;
+            color: black;
+            font-size: 20px;
+        }
+
+        nav .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.6rem;
+            font-weight: 600;
+           
+        }
+
+        nav .logo img {
+            width: 50px;
+            margin-right: 10px;
+            border-radius: 100%;
+        }
+
+        nav ul {
+            display: flex;
+        }
+
+        nav ul li {
+            list-style: none;
+            margin: 10px 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            
+            font-weight: 500;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: black;
+            margin: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 5px;
+            position: relative;
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: -5px;
+            position: relative;
+        }
+
+        .overlay {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color:#f1bfba;
+            overflow-x: hidden;
+            transition: 0.5s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .overlay-content {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .overlay-content a {
+            padding: 8px;
+            text-decoration: none;
+            font-size: 36px;
+            color: rgb(0, 0, 0);
+            display: block;
+            transition: 0.3s;
+        }
+
+        .overlay-content a:hover, .overlay-content a:focus {
+            color: #f1f1f1;
+        }
+
+        .overlay .closebtn {
+            position: absolute;
+            top: 20px;
+            right: 45px;
+            font-size: 60px;
+            cursor: pointer;
+            color: black;
+        }
+
+
+
+
+        .content h1 {
+            font-size: 800px;
+            line-height: 1.2;
+            font-weight: 400;
+            font-family: 'Ramaraja';
+            font-size: 48px;
+            color: #ffffff;
+
+        }
+
+        .content p {
+            line-height: 1.6;
+            opacity: 0;
+            color: black;
+            animation-delay: 1s;
+            font-family: 'Ramaraja';
+        }
+
+        .links {
+            margin-top: 30px;
+            opacity: 0;
+        }
+
+        .links a {
+            color: black;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 1s;
+        }
+
+        .btn {
+            border: 2px solid BLACK;
+            padding: 10px 35px;
+            border-radius: 30px;
+            margin-right: 15px;
+        }
+
+        .slide-right {
+            animation: slideright 1s linear forwards;
+            animation-delay: 1s;
+            opacity: 0;
+        }
+
+        @keyframes slideright {
+            0% {
+                transform: translate(100px);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(0px);
+                opacity: 1;
+            }
+        }
+
+        .slide-left {
+            animation: slideleft 1s linear forwards;
+        }
+
+        @keyframes slideleft {
+            0% {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0px);
+                opacity: 1;
+            }
+        }
+
+
+
+        .links.slide-left {
+            animation-delay: 1s;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .main-content {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+
+
+
+
+            .btn {
+                padding: 8px 30px;
+            }
+
+
+        }
+
+        @media (min-width: 769px) {
+            .feature-img {
+                width: 400px;
+                position: absolute;
+                bottom: 40px;
+                right: 5%;
+            }
+        }
+        .links a:hover {
+            background-color: #2F005D;
+            color: black;
+            text-decoration: none;
+        }
+        .nav-links li a{
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+            
+        }
+        .SDGheading {
+            width: 90%;
+            height: 80%;
+            background-color: #D7A496;
+            font-size: 60px;
+            color: black;
+        }
+
+        .SDGheading p {
+            font-size: 60px;
+            color: black;
+            margin-top: 0px;
+            
+        }
+        .sdgGoals {
+            width: 15%;
+            padding-right: 1%;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <nav>
+            <div class="logo">
+                <a href="index.html"><img src="images/YAC Logo.png" alt=""></a>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="founder.html">Founder</a></li>
+                <li><a href="team.html">Our Team</a></li>
+                <li><a href="blog.html">Blogs</a></li>
+                <li><a href="mun.html">Model UN</a></li>
+                <li><a href="debate.html">Debates</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li>
+                    <a onclick="toggleMore(event)">More ▼</a>
+                    <ul class="more-submenu">
+                        <li><a href="resource.html">Resources</a></li>
+                        <li><a href="sdggoals.html">SDG Goals</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+
+        <div class="overlay" id="overlay">
+            <span class="closebtn" id="closebtn">&times;</span>
+            <div class="overlay-content">
+                <a href="founder.html">Founder</a>
+                <a href="about.html">Our Team</a>
+                <li><a href="team.html">Blogs</a></li>
+                <a href="judges.html">Model UN</a>
+                <a href="faq.html">Debates</a>
+                <a href="contact.html">Contact</a>
+                <li>
+                    <a onclick="toggleMore(event)">More ▼</a>
+                    <ul class="more-submenu">
+                        <center><li><a href="resource.html">Resources</a></li></center>
+                        <center><li><a href="sdggoals.html">SDG Goals</a></li></center>
+                    </ul>
+                </li>
+            </div>
+        </div>
+
+    </div> <br>
+
+    <center><div class="SDGheading"><p>SDG Goals</p></div></center>
+    <center>
+        <div>
+            <img class="sdgGoals" src="images/sdg4.png" alt="">
+            <img class="sdgGoals" src="images/sdg5.jpg" alt="">
+            <img class="sdgGoals" src="images/sdg10.jpg" alt="">
+            <img class="sdgGoals" src="images/sdg16.png" alt="">
+            <img class="sdgGoals" src="images/sdg17.jpg" alt="">
+        </div></center>
+
+        <div style="margin: 2%; background-color: rgba(244, 171, 217, 0); border-radius: 10px;"> <br>
+                <h3 style="font-family: 'Parisienne'; font-size: 30px;">Number 4: Quality Education</h3>
+                <p style="font-family: 'Times New Roman'; font-size: 16px;">YAF's commitment to education is very palpable in terms of its Model United Nations Conferences, Competitions, and Internships. All these programs aid students in learning through activity-oriented processes that develop critical thinking, public speaking, and diplomacy. YAF thus helps guarantee inclusive and equitable quality education by engaging young people in the discussion of global issues for the promotion of lifelong learning opportunities for all. This focus on education is important in empowering the next generation to gain the skills and knowledge needed to navigate an interdependent world.</p>
+            </div>
+            
+            <div style="margin: 1%; background-color: rgba(244, 171, 217, 0); border-radius: 10px;"> <br>
+                <h3 style="font-family: 'Parisienne'; font-size: 30px;">Number 5: Gender Equality</h3>
+                <p style="font-family: 'Times New Roman'; font-size: 16px;">By engaging all genders in participation in all its activities and programs, the Youth Affairs Forum serves the promotion of gender equality. In providing a forum for multiple voices to be represented and valued, YAF furthers realization toward gender equality and the empowerment of all women and girls. And with a board comprising more women than men, the approach by the organization ensures that opportunities in developing leadership skills and engaging in the global discourse are given, on an equal platform, to young women who otherwise challenge traditional gender roles and stereotypes.
+                </p>
+            </div>
+
+            <div style="margin: 1%; background-color: rgba(244, 171, 217, 0); border-radius: 10px;"> <br>
+                <h3 style="font-family: 'Parisienne'; font-size: 30px;">Number 10: Reduced Inequality</h3>
+                <p style="font-family: 'Times New Roman'; font-size: 16px;">YAF empowers youth from diverse backgrounds, targeting SDG 10, which aims to reduce inequality within and among countries. The Club provides access to educational and leadership opportunities for students from diverse backgrounds and promotes the equalization of the playing field for those who, due to various circumstances, are hindered by socioeconomic or cultural barriers in their lives. This helps foster an environment in which youth, regardless of background, can contribute to global discussions and decision-making on an equal footing.
+                </p>
+            </div>
+
+            <div style="margin: 1%; background-color: rgba(244, 171, 217, 0); border-radius: 10px;"> <br>
+                <h3 style="font-family: 'Parisienne'; font-size: 30px;">Number 16: Peace, Justice and Strong Institutions</h3>
+                <p style="font-family: 'Times New Roman'; font-size: 16px;">All the activities organized by YAF, including its Model United Nations conferences, intrinsically work to support SDG 16 by encouraging peace, justice, and strong institutions. Through such simulations, students become more informed about international relations, diplomacy, and the governance structures that underpin these. YAF has been working on building a foundation for a more peaceful and just world by educating young people regarding the mechanisms that maintain global peace and justice. In addition, the structure purports teaching about the resolutions of conflicts and human rights, thereby further moving towards the realization of this goal.
+                </p>
+            </div>
+
+            <div style="margin: 1%; background-color: rgba(244, 171, 217, 0); border-radius: 10px;"> <br>
+                <h3 style="font-family: 'Parisienne'; font-size: 30px;">Number 17: Partnership for the Goals</h3>
+                <p style="font-family: 'Times New Roman'; font-size: 16px;">The association that YAF does is in the spirit of SDG 17, highlighting that without partnerships, it will be hard to attain the SDGs. Through collaborative efforts with institutions, NGOs, and other organizations, YAF brings students together into a global network of actors. These partnerships increase the quality of the various programs offered and enhance a sense of global citizenship among participants. These connections are greatly enhanced by YAF and further continue making a world which is unitedly connected and collaborative for young people to act as a collective force towards sustainable development.
+                </p>
+            </div>
+
+      
+
+   
+       
+   
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const overlay = document.getElementById('overlay');
+        const closeBtn = document.getElementById('closebtn');
+
+        menuToggle.addEventListener('click', () => {
+            overlay.style.width = '100%';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            overlay.style.width = '0';
+        });
+
+        function toggleMore(event) {
+            event.preventDefault();
+            const moreSubmenu = event.currentTarget.nextElementSibling;
+            moreSubmenu.classList.toggle('active');
+        }
+    </script>
+
+<style>
+    .more-submenu {
+            display: none;
+            position: absolute;
+            margin-left: -4%;
+            flex-direction: column;
+            z-index: 1;
+            list-style: none;
+        }
+
+        .more-submenu li a{
+            margin-top: 1%;
+        }
+
+        .overlay li:hover .more-submenu {
+            display: flex;
+        }
+
+        .nav-links li:hover .more-submenu {
+            display: flex;
+        }
+
+
+
+        .more-submenu a {
+            padding: 8px 16px;
+            color: black;
+            width: 100%;
+            text-align: center;
+        }
+
+
+
+
+
+
+    
+      h2 {
+      font-family: 'Times New Roman', Times, serif;
+      color: black;
+    }
+    h4{
+      color: black;
+    }
+  </style>
+  </body>
+  
+  <style>
+  
+  #title {
+              font-family: 'MonteCarlo';
+              font-size: 50px;
+          }
+      body {
+      text-align: center;
+      
+  }
+
+  .image-section {
+      display: flex;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0);
+      width: 95%;
+      border-radius: 20px;
+  }
+  .section-style {
+      margin-right: 25px;
+      margin-left: 25px;
+      
+  }
+  
+
+  img {
+      width: 200px;
+  }
+  
+
+  
+  </style>
+  
+</body>
+</html>
